@@ -7,7 +7,6 @@
     align-items: center;
 }
 
-
 @mixin flex-start{
     justify-content: flex-start;
 }
@@ -27,4 +26,45 @@
     @include flex-start;
     flex-direction: column;
     flex-basis: 200px;
+}
+
+/**************************************************************************
+ *                  Margin e padding                                      *
+ **************************************************************************/
+
+.mx-auto{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.my-50{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.my-20{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.my-10{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.mx-20{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.mt-10{
+    margin-top: 10px;
+}
+
+.mr-20{
+    margin-right: 20px;
+}
+
+.p-20{
+    padding: 20px;
 }
