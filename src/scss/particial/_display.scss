@@ -1,3 +1,30 @@
 /**************************************************************************
  *                  Display                                               *
  **************************************************************************/
+
+@mixin flex{
+    display: flex;
+    align-items: center;
+}
+
+
+@mixin flex-start{
+    justify-content: flex-start;
+}
+
+.d-flex{
+    @include flex;
+}
+
+.d-flex-wrap{
+    @include flex;
+    @include flex-start;
+    flex-wrap: wrap;
+}
+
+.d-flex-column{
+    @include flex;
+    @include flex-start;
+    flex-direction: column;
+    flex-basis: 200px;
+}
