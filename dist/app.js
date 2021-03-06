@@ -10,11 +10,97 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 new vue__WEBPACK_IMPORTED_MODULE_0__.default({
   el: '#app',
   data: {
-    text: 'testo di vue'
+    test: 'test',
+    selected: "All",
+    textSearch: "",
+    selectedSearch: "Author",
+    dischiMusicali: undefined
+  },
+  beforeCreate: function beforeCreate() {
+    var _this = this;
+
+    console.log('Call API');
+    axios.get('https://flynn.boolean.careers/exercises/api/array/music').then(function (dataAPI) {
+      // console.log(dataAPI.data.response);
+      _this.dischiMusicali = dataAPI.data.response; // add to visibility item variable
+
+      _this.dischiMusicali = _this.dischiMusicali.map(function (disco) {
+        return _objectSpread(_objectSpread({}, disco), {}, {
+          visibility: true
+        });
+      }); // ordinamento per anno d'uscita
+
+      _this.dischiMusicali.sort(function (a, b) {
+        return a.year - b.year;
+      });
+
+      console.log(_this.dischiMusicali);
+    })["catch"](function (error) {
+      console.log('Error in the API call');
+      console.log(error);
+    });
+  },
+  methods: {
+    // cancella testo input
+    resetInputSearch: function resetInputSearch() {
+      this.textSearch = '';
+      this.filtrer();
+    },
+    // filtra dischi per genere musicali
+    filtrer: function filtrer() {
+      var _this2 = this;
+
+      console.log('filtra');
+      this.dischiMusicali.forEach(function (disco) {
+        //search generi musicali
+        if (_this2.selected != 'All') {
+          // controlla il genere dell'album
+          if (_this2.selected == disco.genre) {
+            disco.visibility = true;
+          } else {
+            disco.visibility = false;
+          }
+        } else {
+          disco.visibility = true;
+        } // search generi musicali
+
+
+        var search = _this2.textSearch.toLowerCase();
+
+        var typeSearch = _this2.selectedSearch.toLowerCase();
+
+        var title = disco.title.toLowerCase();
+        var autore = disco.author.toLowerCase(); // entra se testo diverso da stringa vuota e disco visibile dopo filtraggio genere
+
+        if (search != "" && disco.visibility) {
+          // controlla autore
+          if (typeSearch == 'author') {
+            if (autore.includes(search)) {
+              disco.visibility = true;
+            } else {
+              disco.visibility = false;
+            } // controlla titolo album
+
+          } else if (typeSearch == 'title') {
+            if (title.includes(search)) {
+              disco.visibility = true;
+            } else {
+              disco.visibility = false;
+            }
+          }
+        }
+      });
+    }
   }
 });
 
