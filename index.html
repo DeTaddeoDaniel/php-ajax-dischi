@@ -26,7 +26,7 @@
 
             <div class="container">
                 <header class="d-flex"> 
-                    <img class="logo" src="img/logo.png" alt="logo" />
+                    <img class="logo mt-10 mr-20" src="img/logo.png" alt="logo" />
                     <h1 class="text-6xl">Dischi musicali API boolean</h1>
                 </header>
             </div>
@@ -45,7 +45,7 @@
 
             </section>
 
-            <section class="container">
+            <section class="container mt-10">
                     <span class="text-gray-500 text-3xl pr-3">Cerca un autore o il titolo del cd</span>
                     
                     <input class="text-gray-400 bg-black border-2 px-4 rounded-full focus:outline-none"  
@@ -58,11 +58,11 @@
 
                 </section>
 
-            <div class="cds-container container d-flex-wrap" id="app">
+            <div class="cds-container container d-flex-wrap my-50" id="app">
                 <!-- Disco ad esempio -->
-                <div class="cd d-flex-column" v-for="disco in dischiMusicali" v-if="disco.visibility">
+                <div class="cd d-flex-column my-10 mx-20 p-20" v-for="disco in dischiMusicali" v-if="disco.visibility">
                     <img :src="disco.poster" alt="poster album">
-                    <h3>{{disco.title}}</h3>
+                    <h3 class="my-20">{{disco.title}}</h3>
                     <span class="author">{{disco.author}}</span>
                     <span class="year">{{disco.year}}</span>
                 </div>

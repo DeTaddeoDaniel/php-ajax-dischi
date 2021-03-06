@@ -2,13 +2,7 @@
  *                  Main                                                  *
  **************************************************************************/
 
- .cds-container {
-    padding: 50px 0;
-}
-
 .cd {
-    padding: 20px;
-    margin: 10px 20px;
     height: $height-card;
     background: var(--height-card);
     text-align: center;
@@ -19,7 +13,6 @@
 }
 
 .cd h3 {
-    margin: 20px 0;
     color: white;
     font-size: $text-title-card;
     text-transform: uppercase;
